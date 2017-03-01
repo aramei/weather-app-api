@@ -21,7 +21,16 @@ app.get('/', function (req, res) {
 	}).then(function(body) {
 		res.send(body)
 	});
-	
+})
+
+app.get('/forecast', function (req, res) {
+	var city = req.query.city
+	fetch('http://api.apixu.com/v1/forecast.json?key='+ process.env.WEATHER_API +'&q=' + city)
+	.then(function(res) {
+		return res.json();
+	}).then(function(body) {
+		res.send(body)
+	});
 })
 
 app.listen(app.get('port'), function() {
